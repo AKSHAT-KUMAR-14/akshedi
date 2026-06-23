@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
   children: ReactNode;
@@ -13,12 +14,12 @@ export default function AppLayout({ children }: Props) {
         </h2>
 
         <ul className="space-y-3">
-          <li>Dashboard</li>
-          <li>Employees</li>
-          <li>Enrollments</li>
-          <li>Carrier Feeds</li>
-          <li>Exceptions</li>
-          <li>Settings</li>
+            <li><Link to="/">Dashboard</Link></li>
+            <li><Link to="/employees">Employees</Link></li>
+            <li><Link to="/enrollments">Enrollments</Link></li>
+            <li><Link to="/carrier-feeds">Carrier Feeds</Link></li>
+            <li><Link to="/exceptions">Exceptions</Link></li>
+            <li><Link to="/settings">Settings</Link></li>
         </ul>
       </aside>
 
