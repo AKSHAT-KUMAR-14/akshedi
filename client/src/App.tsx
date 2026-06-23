@@ -1,10 +1,11 @@
+import AppLayout from "./layouts/AppLayout";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
+
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
-      <h1 className="text-5xl font-bold">
-        AkshEDI
-      </h1>
-    </div>
+    <AppLayout>
+      <DashboardPage />
+    </AppLayout>
   );
 }
 
