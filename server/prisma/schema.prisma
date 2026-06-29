@@ -14,10 +14,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  SUPER_ADMIN
+  HR_ADMIN
+  HR_MANAGER
+  EMPLOYEE
+}
+
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  role      String   @default("HR_ADMIN")
-  createdAt DateTime @default(now())
+  id          String   @id @default(uuid())
+
+  name        String
+  email       String   @unique
+  password    String
+
+  role        Role     @default(HR_ADMIN)
+
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
