@@ -3,7 +3,13 @@ import {
   registerSchema,
   loginSchema,
 } from "../schemas/auth.schema.js";
-import { registerUser, loginUser } from "../services/auth.service.js";
+import {
+  registerUser,
+  loginUser,
+  getCurrentUser,
+} from "../services/auth.service.js";
+
+import { AuthRequest } from "../types/auth.js";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -43,8 +49,18 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const me = async (_req: Request, res: Response) => {
-  res.json({
-    message: "Current User Controller",
-  });
+export const me = async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await getCurrentUser(req.user!.id);
+
+    res.json({
+      success: true,
+      user,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
