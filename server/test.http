@@ -26,4 +26,4 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5000/api/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ2ZDkxODBlLWYxNmItNDBhNy1hNDczLTE3NmZmNWIxZjRkYSIsImlhdCI6MTc4MjgwMTU2NCwiZXhwIjoxNzgzNDA2MzY0fQ.066E7e2nOIGNve3CboYdFzazDDo_VWjsVpy53EttVe0
+Authorization: Bearer <token>

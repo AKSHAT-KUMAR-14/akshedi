@@ -8,8 +8,9 @@ import {
   loginUser,
   getCurrentUser,
 } from "../services/auth.service.js";
-
 import { AuthRequest } from "../types/auth.js";
+import prisma from "../config/prisma.js";
+
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -49,18 +50,40 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const me = async (req: AuthRequest, res: Response) => {
+export const me = async (
+  req: AuthRequest,
+  res: Response
+) => {
   try {
-    const user = await getCurrentUser(req.user!.id);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.user!.id,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        isActive: true,
+        createdAt: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
     res.json({
       success: true,
       user,
     });
-  } catch (error: any) {
-    res.status(404).json({
+  } catch {
+    res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Internal server error",
     });
   }
 };
